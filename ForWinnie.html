@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>甜度盲盒 🎁</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    padding: 40px;
+}
+h1 {
+    color: white;
+}
+.subtitle {
+    color: white;
+    margin-top: -10px;
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(6, 60px);
+    gap: 15px;
+    justify-content: center;
+    margin-top: 30px;
+}
+button {
+    height: 60px;
+    width: 60px;
+    border: none;
+    border-radius: 15px;
+    font-size: 18px;
+    cursor: pointer;
+    background: white;
+    transition: 0.2s;
+}
+button:hover {
+    transform: scale(1.1);
+    background: #ffe6ea;
+}
+
+/* 让24变大 */
+.big24 {
+    height: 80px;
+    width: 80px;
+    font-size: 26px;
+    background: #ff4d88;
+    color: white;
+    font-weight: bold;
+}
+
+#result {
+    margin-top: 30px;
+    font-size: 18px;
+    color: white;
+    min-height: 50px;
+}
+</style>
+</head>
+<body>
+
+<h1>选一个 1-30 的数字 🎲</h1>
+<p class="subtitle">Winnie Never gonna give you up
+Never gonna let you down  </p>
+<p style="color:white;">看看你会抽到什么任务 😏</p>
+
+<div class="grid" id="numbers"></div>
+<div id="result"></div>
+
+<script>
+const tasks = [
+"她可以问你一个问题，你必须认真回答",
+"说一个你第一次觉得她有点特别的瞬间",
+"她指定一个称呼，你今天必须这样叫她",
+"说一个你对她的第一印象",
+"她可以翻你手机相册一张照片（你选类别）",
+"选一个：她可爱 / 她聪明 / 她特别 ——只能选一个并解释",
+"她问一个‘为什么’，你必须解释清楚",
+"说一个你觉得她吸引人的点",
+"她可以决定下次聊天的话题",
+"选一个词形容她气质（不能用普通词）",
+"她问你一个暧昧问题，你不能反问",
+"说一句如果她生气你会怎么哄",
+"她可以让你做一个5秒语音",
+"选一个：陪她吃饭 / 陪她散步 / 陪她看电影 ——解释原因",
+"说一个你对她的隐藏评价",
+"0",
+"说一句你不敢轻易对别人说的话",
+"她问你一个关于未来的问题",
+"选一个：她主动 / 你主动 ——说理由",
+"说一个你觉得她最有魅力的时刻",
+"她可以决定你今天的微信签名",
+"说一句你曾经想对她说但没说的话",
+"她问你一个关于‘喜欢’的问题",
+"她可以指定你发一个朋友圈内容（她审核）",
+"说一个如果别人追她你会怎么想",
+"她可以给你设一个小任务",
+"说一个你在她面前会紧张的点",
+"她问你一个假设性问题（比如如果我们…）",
+"选一个：现在抱一下 / 牵手3秒 / 对视10秒（假设题）",
+"终极题：说一句如果她认真听你会心跳加速的话 💗"
+];
+
+
+const grid = document.getElementById("numbers");
+const result = document.getElementById("result");
+
+// 创建1-30
+for (let i = 1; i <= 30; i++) {
+    const btn = document.createElement("button");
+    btn.innerText = i;
+
+    // 唯一24变大
+    if (i === 24) {
+        btn.classList.add("big24");
+    }
+
+    btn.onclick = function() {
+        result.innerHTML = "🎁 你抽到的是：<br><br><b>" + tasks[i-1] + "</b>";
+    };
+
+    grid.appendChild(btn);
+}
+</script>
+
+</body>
+</html>
