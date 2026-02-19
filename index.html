@@ -2,7 +2,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>甜度盲盒 🎁</title>
+
 <style>
 body {
     font-family: Arial, sans-serif;
@@ -10,13 +12,9 @@ body {
     background: linear-gradient(135deg, #ff9a9e, #fad0c4);
     padding: 40px;
 }
-h1 {
-    color: white;
-}
-.subtitle {
-    color: white;
-    margin-top: -10px;
-}
+h1 { color: white; }
+.subtitle { color: white; margin-top: -10px; }
+
 .grid {
     display: grid;
     grid-template-columns: repeat(6, 60px);
@@ -24,6 +22,7 @@ h1 {
     justify-content: center;
     margin-top: 30px;
 }
+
 button {
     height: 60px;
     width: 60px;
@@ -34,12 +33,12 @@ button {
     background: white;
     transition: 0.2s;
 }
+
 button:hover {
     transform: scale(1.1);
     background: #ffe6ea;
 }
 
-/* 让24变大 */
 .big24 {
     height: 80px;
     width: 80px;
@@ -57,11 +56,14 @@ button:hover {
 }
 </style>
 </head>
+
 <body>
 
 <h1>选一个 1-30 的数字 🎲</h1>
-<p class="subtitle">Winnie Never gonna give you up
-Never gonna let you down  </p>
+<p class="subtitle">
+Winnie Never gonna give you up<br>
+Never gonna let you down
+</p>
 <p style="color:white;">看看你会抽到什么任务 😏</p>
 
 <div class="grid" id="numbers"></div>
@@ -84,12 +86,11 @@ const tasks = [
 "她可以让你做一个5秒语音",
 "选一个：陪她吃饭 / 陪她散步 / 陪她看电影 ——解释原因",
 "说一个你对她的隐藏评价",
-"0",
 "说一句你不敢轻易对别人说的话",
 "她问你一个关于未来的问题",
 "选一个：她主动 / 你主动 ——说理由",
 "说一个你觉得她最有魅力的时刻",
-"她可以决定你今天的微信签名",
+"她可以决定你的whatsapp签名",
 "说一句你曾经想对她说但没说的话",
 "她问你一个关于‘喜欢’的问题",
 "她可以指定你发一个朋友圈内容（她审核）",
@@ -98,25 +99,39 @@ const tasks = [
 "说一个你在她面前会紧张的点",
 "她问你一个假设性问题（比如如果我们…）",
 "选一个：现在抱一下 / 牵手3秒 / 对视10秒（假设题）",
-"终极题：说一句如果她认真听你会心跳加速的话 💗"
+"说一句如果有后悔药吃不 为什么 ",
+"认真说一句对不起。"
 ];
 
+let remainingTasks = [...tasks];
 
 const grid = document.getElementById("numbers");
 const result = document.getElementById("result");
 
-// 创建1-30
 for (let i = 1; i <= 30; i++) {
     const btn = document.createElement("button");
     btn.innerText = i;
 
-    // 唯一24变大
     if (i === 24) {
         btn.classList.add("big24");
     }
 
     btn.onclick = function() {
-        result.innerHTML = "🎁 你抽到的是：<br><br><b>" + tasks[i-1] + "</b>";
+
+        if (remainingTasks.length === 0) {
+            result.innerHTML = "💌 所有任务已经抽完了。";
+            return;
+        }
+
+        const randomIndex = Math.floor(Math.random() * remainingTasks.length);
+        const chosenTask = remainingTasks[randomIndex];
+
+        remainingTasks.splice(randomIndex, 1);
+
+        result.innerHTML = "🎁 你抽到的是：<br><br><b>" + chosenTask + "</b>";
+
+        btn.disabled = true;
+        btn.style.opacity = "0.4";
     };
 
     grid.appendChild(btn);
@@ -125,4 +140,3 @@ for (let i = 1; i <= 30; i++) {
 
 </body>
 </html>
-
